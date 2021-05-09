@@ -1,0 +1,27 @@
+server:
+  port: 9000
+
+eureka:
+  server:
+    # 是否开启自我保护模式 单机生产开启
+#    enable-self-preservation: false
+    # 生产关闭
+    renewal-percent-threshold: 0.49
+  instance:
+    hostname: 127.0.0.1
+  client:
+    # 声明是否将自己的信息注册到 Eureka 服务器上
+    register-with-eureka: false
+    # 是否到 Eureka 服务器中抓取注册信息
+    fetch-registry: false
+    serviceUrl:
+      # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址(单机版)
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      # 集群版
+  #      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/
+
+
+  spring:
+    application:
+      name: eurka-service
+

@@ -1,0 +1,40 @@
+server:
+  port: 9003
+
+eureka:
+  instance:
+    preferIpAddress: true
+    instance-id: feign-${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9000/eureka/
+
+spring:
+  application:
+    name: feign-service
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: false
+    config:
+      discovery:
+        # 开启配置中心服务发现的支持
+        enabled: true
+        # 配置中心服务的id
+        service-id: config-service
+      # 读取后缀名称
+      profile: dev
+      # 配置文件名称
+      name: config
+      # 如果访问配置中心失败, 则停止启动服务
+      fail-fast: true
+      # 访问配置中心失败时的重试策略
+      retry:
+        # 初始间隔
+        initial-interval: 3000
+        # 最大重试次数
+        max-attempts: 6
+        # 最大重试间隔
+        max-interval: 4000
+        # 每次重试时间是之前重试时间的多少倍
+        multiplier: 1.2

@@ -1,0 +1,24 @@
+server:
+  port: 9001
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: config-${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9000/eureka/
+
+spring:
+  application:
+    name: config-service
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: false
+    config:
+      server:
+        native:
+          search-locations: classpath:config
+  profiles:
+    active: native

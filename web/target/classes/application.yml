@@ -1,0 +1,18 @@
+server:
+  port: 9004
+
+eureka:
+  instance:
+    preferIpAddress: true
+    instance-id: web-${spring.cloud.client.ip-address}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:9000/eureka/
+
+spring:
+  application:
+    name: web-service
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: false

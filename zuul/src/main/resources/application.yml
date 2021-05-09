@@ -1,0 +1,33 @@
+server:
+  port: 9002
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: zuul-${spring.cloud.client.ip-address}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:9000/eureka/
+
+spring:
+  application:
+    name: zuul-service
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: false
+
+zuul:
+  routes:
+    # 接口定向分发 通过serviceId可指定某个服务接管某些接口
+    feign:
+      path: /feign/**
+      serviceId: feign-service
+      sensitiveHeaders: "*"
+    web:
+      path: /web/**
+      serviceId: web-service
+      sensitiveHeaders: "*"
+
+
+
