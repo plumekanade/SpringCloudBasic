@@ -10,6 +10,11 @@
     <version>1.0.0</version>
     <modules>
         <module>common</module>
+        <module>config</module>
+        <module>eureka</module>
+        <module>feign</module>
+        <module>web</module>
+        <module>zuul</module>
     </modules>
 
     <properties>
